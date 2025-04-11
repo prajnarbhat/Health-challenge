@@ -22,3 +22,11 @@ body {
 .pagination_disabled {
     opacity: 0;
 }
+
+.page_disabled {
+    opacity: 0;
+}
+
+.page_selected {
+    background-color: rgb(173, 173, 192);
+}
