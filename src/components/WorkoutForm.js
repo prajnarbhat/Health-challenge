@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import WorkoutContext from "./WorkoutContext";
 
 const WorkoutForm = () => {
 
+    const {data, setData} = useContext(WorkoutContext)
+
     // using useState initialise userName,workoutType,workoutMin
-    const [data, setData] = useState([])
+    
     const [ userName, setName] = useState("");
     const [ workoutType, setWorkoutType] = useState("")
     const [ workoutMin, setWorkoutMin] = useState("")
@@ -62,6 +65,10 @@ const WorkoutForm = () => {
         }
         console.log("Updated Data:", updatedData)
         setData(updatedData)
+
+        setName("")
+        setWorkoutType(" ")
+        setWorkoutMin("")
 
         
 
