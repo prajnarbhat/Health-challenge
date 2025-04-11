@@ -7,9 +7,6 @@
     margin: 0;
 }
 
-body {
-    background-color: pink;
-}
 
 .component-one {
     color : blue;
@@ -28,5 +25,39 @@ body {
 }
 
 .page_selected {
-    background-color: rgb(173, 173, 192);
+    background-color:  #b7c5d3;
 }
+
+.pagination {
+    display: flex;
+    padding: 15px;
+    justify-content: center;
+    cursor: pointer;
+    
+  }
+
+  .pagination > span {
+    padding: 10px;
+    border: 1px solid gray;
+    text-decoration: none;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;  
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+  .pagination > span button {
+    text-decoration: none;
+    display: inline-block;
+  }
+  
+  .pagination > span .previous {
+    color: black;
+    border: none;
+    width: 70px;
+  }
+  
+  .pagination > span .next{
+    color: black;
+    border: none;
+    width: 70px;
+  }
