@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import WorkoutContext from "./WorkoutContext";
 
 const WorkoutForm = () => {
@@ -10,6 +11,8 @@ const WorkoutForm = () => {
     const [ userName, setName] = useState("");
     const [ workoutType, setWorkoutType] = useState("")
     const [ workoutMin, setWorkoutMin] = useState("")
+
+    const navigate = useNavigate();
 
     const mergeWorkoutMin = (workouts) => {
         return workouts.reduce((acc,workout) => {
@@ -61,16 +64,16 @@ const WorkoutForm = () => {
 
         // If no → adds a new user with this workout.
         if(!data.some(user => user.userName == userName)) {
-           updatedData = [{userName, workouts: [newWorkoutData]}]
+           updatedData = [...data,{userName, workouts: [newWorkoutData]}]
         }
-        console.log("Updated Data:", updatedData)
+        //console.log("Updated Data:", updatedData)
         setData(updatedData)
 
         setName("")
         setWorkoutType(" ")
         setWorkoutMin("")
-
         
+        navigate("/Table")
 
     }
     return (
@@ -83,11 +86,11 @@ const WorkoutForm = () => {
                     <h5 className="text-xl font-medium text-gray-900 dark:text-white"> Add User </h5>
                     <div className="form-element">
                         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> UserName </label>
-                        <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" name={userName} type="text" value={userName} onChange={(e) => setName(e.target.value)}/>
+                        <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" name={userName} type="text" value={userName} onChange={(e) => setName(e.target.value)} required/>
                     </div>
                     <div>
                     <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> Workout Type </label>
-                    <select className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" value={workoutType} onChange={(e) => setWorkoutType(e.target.value)}>
+                    <select className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" value={workoutType} onChange={(e) => setWorkoutType(e.target.value)} required>
                         <option> Select a workout type </option>
                         <option> Yoga </option>
                         <option> Running </option>
@@ -97,7 +100,7 @@ const WorkoutForm = () => {
                     </div>
                     <div>
                     <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> Workout Min </label>
-                    <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" type="number" value={workoutMin} onChange={(e) => setWorkoutMin(e.target.value)}/>
+                    <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" type="number" value={workoutMin} onChange={(e) => setWorkoutMin(e.target.value)} required/>
                     </div>
 
                     <button className="w-full text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="Submit"> Submit </button>
