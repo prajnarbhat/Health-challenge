@@ -49,7 +49,7 @@ const WorkoutGraph = () => {
                 <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Select a User</h3>
                     {arrayOfUserData.map((user) => (
                     <button key={user.userName}
-                    className="w-full p-2 bg-gray-200 border border-gray-300 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-500 dark:hover:bg-gray-700"
+                    className="w-full p-2 bg-gray-50 border border-gray-300 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-500 dark:hover:bg-gray-700"
                     onClick={() => setUser(user)}
                 > {user.userName} </button>
                 ))}

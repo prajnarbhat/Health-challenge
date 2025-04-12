@@ -12,20 +12,12 @@
     color : blue;
 }
 
-.pagination_selected {
-    background-color: blue;
-}
-
-.pagination_disabled {
-    opacity: 0;
-}
-
 .page_disabled {
     opacity: 0;
 }
 
 .page_selected {
-    background-color:  #b7c5d3;
+    background-color:  #F9FAFB;;
 }
 
 .pagination {
