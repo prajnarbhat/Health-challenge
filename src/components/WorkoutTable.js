@@ -62,8 +62,8 @@ const WorkoutTable = () => {
     return (
         <>
         <div className="bg-gray-300 min-h-screen">
-        <div className="relative overflow-x-auto bg-gray-400 m-2">
-            <input type="search" value={searchValue} onChange={(e) => setsearchValue(e.target.value)}/>
+        <div className="flex gap-x-4 pt-5 ml-2">
+            <input className="bg-white text-black-1000 p-2" type="search" value={searchValue} onChange={(e) => setsearchValue(e.target.value)}/>
             <select value={workoutValue} onChange={(e) => setWorkoutValue(e.target.value)}>
                 <option> Select a workoutType </option>
                 {wtype.map(w => (
@@ -72,25 +72,26 @@ const WorkoutTable = () => {
 
             </select>
         </div>
+        
         <div className="relative overflow-x-auto bg-gray-400 m-2">
         
         <table border="1" className="w-full text-sm text-left rtl:text-right bg-white">
             <thead className="uppercase dark:text-black-900">
                 <tr>
-                    <th scope="col" className="px-6 py-3"> User Name </th>
-                    <th scope="col" className="px-6 py-3"> Workout Type </th>
-                    <th scope="col" className="px-6 py-3"> Number of workouts</th>
-                    <th scope="col" className="px-6 py-3"> Workout Min </th>
+                    <th scope="col" className="px-4 py-3"> User Name </th>
+                    <th scope="col" className="px-4 py-3"> Workout Type </th>
+                    <th scope="col" className="px-4 py-3"> Number of workouts</th>
+                    <th scope="col" className="px-4 py-3"> Workout Min </th>
                 </tr>
             </thead>
             <tbody className="relative overflow-x-auto w-100 divide-y devide-gray-300">
                 {paginatedData.length > 0 ? (
                     paginatedData.map((user,index) => (
                         <tr key={index}>
-                        <td className="px-6 py-3"> {user.userName} </td>
-                        <td className="px-6 py-3"> {user.workouts.map(workout => workout.workoutType).join(",")}</td>
-                        <td className="px-6 py-3">  {user.workouts.map(workout => workout.workoutType).length}</td>
-                        <td className="px-6 py-3"> {user.workouts.reduce((acc,workout) => {
+                        <td className="px-4 py-3"> {user.userName} </td>
+                        <td className="px-4 py-3"> {user.workouts.map(workout => workout.workoutType).join(",")}</td>
+                        <td className="px-4 py-3">  {user.workouts.map(workout => workout.workoutType).length}</td>
+                        <td className="px-4 py-3"> {user.workouts.reduce((acc,workout) => {
                             return acc + Number(workout.workoutMin)
                         },0)} </td>
                         </tr>   
