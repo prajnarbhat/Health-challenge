@@ -2,6 +2,7 @@ import React from "react";
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { WorkoutContextProvider } from "./WorkoutContext";
 import WorkoutForm from "./WorkoutForm";
+import WorkoutGraph from "./WorkoutGraph";
 import WorkoutTable from "./WorkoutTable";
 
 const App = () =>{
@@ -12,6 +13,7 @@ const App = () =>{
             <Routes>
                 <Route path="/" element={<WorkoutForm/>}></Route>
                 <Route path="/Table" element={<WorkoutTable/>}> </Route>
+                <Route path="/chart" element={<WorkoutGraph/>}> </Route>
             </Routes>
         </Router>
         </WorkoutContextProvider>

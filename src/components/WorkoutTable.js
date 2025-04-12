@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import WorkoutContext from "./WorkoutContext";
 const WorkoutTable = () => {
 
@@ -17,12 +18,14 @@ const WorkoutTable = () => {
         const result = [...data]
 
         const ApplySearchByUserName = (users) => {
+            if(!searchValue) return [];
             return result.filter(user => {
                 return user.userName.toLowerCase().includes(searchValue.toLowerCase())
             })
         }
 
         const ApplyFilterByWorkoutType = (users) => {
+            if(!workoutValue) return [];
             return users.filter(user => 
                 user.workouts.some(workout => 
                     workout.workoutType.toLowerCase().includes(workoutValue.toLowerCase())
@@ -39,7 +42,7 @@ const WorkoutTable = () => {
         console.log(filteredData)
 
         setData( searchValue || workoutValue ? filteredData : result);
-        setPage(1)
+        setPage(1);
     },[searchValue, workoutValue, data])
 
     const itemsPerPage = 4;
@@ -47,10 +50,6 @@ const WorkoutTable = () => {
     let paginatedData = userData.slice((itemsPerPage*page) - itemsPerPage,itemsPerPage*page)
 
     console.log("Data in table:", data)
-
-    useEffect(() => {
-        setData(data);
-    })
 
     const wtype = ["cycling","swimming","yoga","running"]
 
@@ -62,8 +61,19 @@ const WorkoutTable = () => {
     return (
         <>
         <div className="bg-gray-300 min-h-screen">
+            <div className="flex justify-around pt-5">
+                <button> <Link to="/Table" className="w-full text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">User table</Link></button>
+                <button> <Link to="/chart" className="w-full text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"> User Progress  </Link></button>
+            </div>
+            <div className="block m-4 p-3 bg-gray-200 border border-gray-100 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+            <div className="m-3">
+                <Link to="/" className="w-full text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"> Add user </Link>
+                
+            </div>
+            </div>
+        <div className="block m-4 p-3 bg-gray-200 border border-gray-100 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
         <div className="flex gap-x-4 pt-5 ml-2">
-            <input className="bg-white text-black-1000 p-2" type="search" value={searchValue} onChange={(e) => setsearchValue(e.target.value)}/>
+            <input className="bg-white text-black-1000 p-2 text-black-1000" type="search" placeholder="Search by name" value={searchValue} onChange={(e) => setsearchValue(e.target.value)}/>
             <select value={workoutValue} onChange={(e) => setWorkoutValue(e.target.value)}>
                 <option> Select a workoutType </option>
                 {wtype.map(w => (
@@ -73,7 +83,7 @@ const WorkoutTable = () => {
             </select>
         </div>
         
-        <div className="relative overflow-x-auto bg-gray-400 m-2">
+        <div className="block relative overflow-x-auto bg-gray-400 m-2">
         
         <table border="1" className="w-full text-sm text-left rtl:text-right bg-white">
             <thead className="uppercase dark:text-black-900">
@@ -98,7 +108,7 @@ const WorkoutTable = () => {
                     ))
                 ) : (
                     <tr>
-                        <td> No data found</td>
+                        <td className="px-4 py-3 text-lg"> No data found</td>
                     </tr>
                 )}
                
@@ -120,6 +130,7 @@ const WorkoutTable = () => {
 
             </div>
         )}
+        </div>
         </div>
         </>
 
