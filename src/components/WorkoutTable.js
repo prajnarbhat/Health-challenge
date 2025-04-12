@@ -7,6 +7,41 @@ const WorkoutTable = () => {
     const [userData, setData] = useState([])
     const [page,setPage] = useState(1)
 
+    // search and workoutValue
+    const [searchValue, setsearchValue] = useState("");
+    const [workoutValue, setWorkoutValue] = useState("")
+
+    // Apply useEffect as searchValue,workoutValue changes
+    useEffect(() => {
+
+        const result = [...data]
+
+        const ApplySearchByUserName = (users) => {
+            return result.filter(user => {
+                return user.userName.toLowerCase().includes(searchValue.toLowerCase())
+            })
+        }
+
+        const ApplyFilterByWorkoutType = (users) => {
+            return users.filter(user => 
+                user.workouts.some(workout => 
+                    workout.workoutType.toLowerCase().includes(workoutValue.toLowerCase())
+                )
+            )
+        }
+
+        const filteredUserNameData = ApplySearchByUserName(result)
+        const filterByWorkoutType = ApplyFilterByWorkoutType(result)
+
+        // combining both logic
+        const filteredData = [...new Set([...filteredUserNameData, ...filterByWorkoutType])]
+
+        console.log(filteredData)
+
+        setData( searchValue || workoutValue ? filteredData : result);
+        setPage(1)
+    },[searchValue, workoutValue, data])
+
     const itemsPerPage = 4;
 
     let paginatedData = userData.slice((itemsPerPage*page) - itemsPerPage,itemsPerPage*page)
@@ -17,6 +52,8 @@ const WorkoutTable = () => {
         setData(data);
     })
 
+    const wtype = ["cycling","swimming","yoga","running"]
+
     const selectPageHandler = (selectedPage) => {
         if(selectedPage >= 1 && selectedPage <= Math.ceil(userData.length/itemsPerPage) && selectedPage != page)
         setPage(selectedPage)
@@ -26,9 +63,17 @@ const WorkoutTable = () => {
         <>
         <div className="bg-gray-300 min-h-screen">
         <div className="relative overflow-x-auto bg-gray-400 m-2">
-        <div className="p-5 flex items-center justify-center">
-            <h3> Table Data </h3>
+            <input type="search" value={searchValue} onChange={(e) => setsearchValue(e.target.value)}/>
+            <select value={workoutValue} onChange={(e) => setWorkoutValue(e.target.value)}>
+                <option> Select a workoutType </option>
+                {wtype.map(w => (
+                    <option> {w} </option>
+                ))}
+
+            </select>
         </div>
+        <div className="relative overflow-x-auto bg-gray-400 m-2">
+        
         <table border="1" className="w-full text-sm text-left rtl:text-right bg-white">
             <thead className="uppercase dark:text-black-900">
                 <tr>
