@@ -45,7 +45,7 @@ const WorkoutGraph = () => {
             </div>
 
             <div className="flex flex-col md:flex-row gap-4">
-            <div className="w-full md:w-1/3 space-y-2 p-4 bg-gray-200 border border-gray-100 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+            <div className="w-full md:w-1/3 space-y-2 p-4 bg-white border border-gray-100 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
                 <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Select a User</h3>
                     {arrayOfUserData.map((user) => (
                     <button key={user.userName}
@@ -56,7 +56,7 @@ const WorkoutGraph = () => {
             </div>
 
             {selectedUser && (
-                <div className="w-full md:w-2/3 p-4 bg-gray-200 border border-gray-100 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+                <div className="w-full md:w-2/3 p-4 bg-white border border-gray-100 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
                 <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
                     Workout Chart for {selectedUser.userName}
                 </h3>
