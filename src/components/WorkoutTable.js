@@ -63,7 +63,7 @@ const WorkoutTable = () => {
                 </div>
             </div>
             <div className="block m-4 p-3 bg-gray-200 border border-gray-100 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                <div className="flex flex-row gap-x-4 pt-5 ml-2 md:flex flex-col">
+                <div className="flex flex-row gap-x-4">
                     <input className="bg-white text-black-1000 p-2 text-black-1000 md:w-w/2 m-2" type="search" placeholder="Search by name" value={searchValue} onChange={(e) => setsearchValue(e.target.value)}/>
                     <select className="bg-white text-black-1000 p-2 text-black-1000 md:w-w/2 m-2" value={workoutValue} onChange={(e) => setWorkoutValue(e.target.value)}>
                         <option> Select a workoutType </option>
