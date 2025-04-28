@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import Navbar from "./Navbar";
 import { WorkoutContextProvider } from "./WorkoutContext";
 import WorkoutForm from "./WorkoutForm";
 import WorkoutGraph from "./WorkoutGraph";
@@ -10,6 +11,7 @@ const App = () =>{
     return (
         <WorkoutContextProvider>
             <Router>
+                <Navbar/>
                 <Routes>
                     <Route path="/" element={<WorkoutForm/>}></Route>
                     <Route path="/Table" element={<WorkoutTable/>}> </Route>

@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import WorkoutContext from "./WorkoutContext";
 const WorkoutTable = () => {
 
@@ -16,14 +15,14 @@ const WorkoutTable = () => {
         const result = [...data]
 
         const ApplySearchByUserName = (users) => {
-            if(!searchValue) return [];
+            if(!searchValue) return result;
             return result.filter(user => {
                 return user.userName.toLowerCase().includes(searchValue.toLowerCase())
             })
         }
 
         const ApplyFilterByWorkoutType = (users) => {
-            if(!workoutValue) return [];
+            if(!workoutValue) return result;
             return users.filter(user => 
                 user.workouts.some(workout => 
                     workout.workoutType.toLowerCase().includes(workoutValue.toLowerCase())
@@ -53,16 +52,7 @@ const WorkoutTable = () => {
     return (
         <>
         <div className="bg-gray-300 min-h-screen">
-            <div className="flex justify-around pt-5">
-                <button> <Link to="/Table" className="w-full text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">User table</Link></button>
-                <button> <Link to="/chart" className="w-full text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"> User Progress  </Link></button>
-            </div>
-            <div className="block m-4 p-3 bg-gray-200 border border-gray-100 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                <div className="m-3">
-                    <Link to="/" className="w-full text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"> Add user </Link>    
-                </div>
-            </div>
-            <div className="block m-4 p-3 bg-gray-200 border border-gray-100 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+            <div className="block p-3 bg-gray-200 border border-gray-100 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                 <div className="flex flex-row gap-x-4">
                     <input className="bg-white text-black-1000 p-2 text-black-1000 md:w-w/2 m-2" type="search" placeholder="Search by name" value={searchValue} onChange={(e) => setsearchValue(e.target.value)}/>
                     <select className="bg-white text-black-1000 p-2 text-black-1000 md:w-w/2 m-2" value={workoutValue} onChange={(e) => setWorkoutValue(e.target.value)}>
@@ -74,8 +64,7 @@ const WorkoutTable = () => {
                 </div>
         
                 <div className="block relative overflow-x-auto bg-gray-400 m-2">
-        
-                <table border="1" className="w-full text-sm text-left rtl:text-right bg-white">
+                <table border="1" className="w-full text-sm text-left rtl:text-right bg-white p-10">
                     <thead className="uppercase dark:text-black-900">
                     <tr>
                         <th scope="col" className="px-4 py-3"> User Name </th>

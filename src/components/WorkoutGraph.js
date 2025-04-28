@@ -9,7 +9,6 @@ import {
 } from 'chart.js';
 import React, { useContext, useState } from "react";
 import { Bar } from "react-chartjs-2";
-import { Link } from "react-router-dom";
 import WorkoutContext from "./WorkoutContext";
   
   ChartJS.register(
@@ -31,11 +30,6 @@ const WorkoutGraph = () => {
         <>
             <div className="bg-gray-300 min-h-screen w-full p-4 sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
                 <div className="bg-gray-200 border border-gray-100 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 p-4">
-                    <div className="mb-4">
-                        <Link to="/Table" className="inline-block text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                            &#8249; Back to table
-                        </Link>
-                    </div>
                 <div className="flex flex-col md:flex-row gap-4">
                     <div className="w-full md:w-1/3 space-y-2 p-4 bg-white border border-gray-100 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
                         <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Select a User</h3>
