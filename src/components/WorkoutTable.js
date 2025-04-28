@@ -45,7 +45,7 @@ const WorkoutTable = () => {
     const wtype = ["cycling","swimming","yoga","running"]
 
     const selectPageHandler = (selectedPage) => {
-        if(selectedPage >= 1 && selectedPage <= Math.ceil(userData.length/itemsPerPage) && selectedPage != page)
+        if(selectedPage >= 1 && selectedPage <= Math.ceil(userData.length/itemsPerPage) && selectedPage !== page)
         setPage(selectedPage)
     }
 
@@ -100,7 +100,7 @@ const WorkoutTable = () => {
                     <span className={page > 1 ? "" : "page_disabled"} onClick={() => selectPageHandler(page-1)}> <button className="previous"> Previous</button></span> 
           
                     {[...Array(Math.ceil(userData.length/itemsPerPage))].map((__dirname, index) => (
-                    <span onClick={() => selectPageHandler(index+1)} className={page == index+1 ? "page_selected" : ""}> <button> {index + 1} </button></span> ))
+                    <span onClick={() => selectPageHandler(index+1)} className={page === index+1 ? "page_selected" : ""}> <button> {index + 1} </button></span> ))
                     }
 
                     <span className={page < Math.ceil(userData.length/itemsPerPage) ? "" : "page_disabled"} onClick={() => selectPageHandler(page+1)}><button className="next"> Next </button></span>
