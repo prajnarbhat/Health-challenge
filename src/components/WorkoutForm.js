@@ -18,7 +18,7 @@ const WorkoutForm = () => {
         return workouts.reduce((acc,workout) => {
 
             // Check if the acc array contains any workout where the workoutType already exists, matching the one we're trying to add.
-            let existingWorkoutType = acc.find(w => w.workoutType == workout.workoutType)
+            let existingWorkoutType = acc.find(w => w.workoutType === workout.workoutType)
             // If a workout with the specified workoutType exists, it returns that specific workout array. If not, it returns null, and we need to create a new workout array.
             
             // if there is any existingWorkoutType returns an array of that workout array
@@ -62,7 +62,7 @@ const WorkoutForm = () => {
         })
 
         // If no → adds a new user with this workout.
-        if(!data.some(user => user.userName == userName)) {
+        if(!data.some(user => user.userName === userName)) {
            updatedData = [...data,{userName, workouts: [newWorkoutData]}]
         }
         
