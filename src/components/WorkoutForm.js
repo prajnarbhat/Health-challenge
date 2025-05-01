@@ -11,6 +11,7 @@ const WorkoutForm = () => {
     const [ userName, setName] = useState("");
     const [ workoutType, setWorkoutType] = useState("");
     const [ workoutMin, setWorkoutMin] = useState("");
+    const [ error, setError] = useState({})
 
     const navigate = useNavigate();
 
@@ -39,11 +40,32 @@ const WorkoutForm = () => {
         setWorkoutMin("")
     }
 
+    const validation = () => {
+
+        const validationError = {}
+        if(!userName.trim()) {
+            validationError.userName = "User name is required"
+        }
+        if(!workoutType.trim() || workoutType === "Select a workout type") {
+            validationError.workoutType = "Workout Type is required"
+        }
+        if(!workoutMin.trim()) {
+            validationError.workoutMin = "Workout Min is required"
+        }
+        return validationError;
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
         // Everytime user add a new Workout data to a same user or a different user
+        const validationErrors = validation();
+        setError(validationErrors)
 
+        if(Object.keys(validationErrors).length !== 0) {
+            return ;
+        }
+        
         const newWorkoutData = {
             workoutType: workoutType,
             workoutMin: Number(workoutMin)
@@ -90,21 +112,27 @@ const WorkoutForm = () => {
 
                     <div className="form-element">
                         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> UserName </label>
-                        <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" name={userName} type="text" value={userName} onChange={(e) => setName(e.target.value)} required/>
+                        <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" name={userName} type="text" value={userName} onChange={(e) => setName(e.target.value)}/>
+                        {error.userName &&
+                           <p  className="text-red-500 text-sm"> {error.userName}</p>}
                     </div>
                     <div>
                         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> Workout Type </label>
-                        <select className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" value={workoutType} onChange={(e) => setWorkoutType(e.target.value)} required>
+                        <select className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" value={workoutType} onChange={(e) => setWorkoutType(e.target.value)}>
                             <option> Select a workout type </option>
                             <option> Yoga </option>
                             <option> Running </option>
                             <option> Swimming </option>
                             <option> Cycling </option>
                         </select>
+                        {error.workoutType &&
+                           <p  className="text-red-500 text-sm"> {error.workoutType}</p>}
                     </div>
                     <div>
                         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> Workout Min </label>
-                        <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" type="number" value={workoutMin} onChange={(e) => setWorkoutMin(e.target.value)} required/>
+                        <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" type="number" value={workoutMin} onChange={(e) => setWorkoutMin(e.target.value)}/>
+                        {error.workoutMin &&
+                           <p  className="text-red-500 text-sm"> {error.workoutMin}</p>}
                     </div>
                     <button className="w-full text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="Submit"> Submit </button>
                 </form>
